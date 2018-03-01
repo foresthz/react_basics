@@ -1,0 +1,116 @@
+
+<head>
+	<title>嵌套组件JSX</title>
+	<script src="https://cdn.staticfile.org/react/15.5.4/react.js"></script>
+	<script src="https://cdn.staticfile.org/react/15.5.4/react-dom.js"></script>
+	<script type="text/javascript" src="https://cdn.staticfile.org/babel-standalone/6.24.0/babel.js"></script>
+</head>
+
+<table>
+	<tr>
+		<td id="c1"></td>
+	</tr>
+	<tr>
+		<td id="c2"></td>
+	</tr>
+	<tr>
+		<td id="c3"></td>
+	</tr>
+	<tr>
+		<td id="c4"></td>
+	</tr>
+	<tr>
+		<td id="c5"></td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+let words = [
+	'闲烹山茗听瓶声，炉内识阴阳之理；漫履楸枰观局戏，手中悟生杀之机。',
+	'芳菲园林看蜂忙，觑破几般尘情世态；寂寞衡茅观燕寝，引起一种冷趣幽思。',
+	'会心不在远，得趣不在多。盆池拳石间，便居然有万里山川之势，片言只语内，便宛然见万古圣贤之心，才是高士的眼界，达人的胸襟。',
+	'面上扫开十层甲，眉目才无可憎；胸中涤去数斗尘，语言方觉有味。'
+];
+
+function e(id) {
+	return document.getElementById(id);
+}
+</script>
+
+<script type="text/babel">
+class Container extends React.Component {
+	render() {
+	    return (
+			<div>
+				<h3>{this.props.title?this.props.title:'WordView'}</h3>
+				<WordView words={this.props.words} />
+			</div>
+			)
+
+	}
+}
+
+class WordView extends React.Component {
+	constructor(props) {
+		super(props);
+	    this.words = this.process(props.words);
+	}
+
+	process(words) {
+		let word_id=1;
+		this.word_react = this.props.words.map(function(word){
+			return <div key={"wordid_"+word_id++}>
+						<div>{word}字数:{word.length}</div>
+				   </div>
+		});
+	}
+	render() {
+		return (
+			<div>
+				{this.word_react}
+			</div>
+		)
+	}
+}
+
+ReactDOM.render(
+	<div>
+		<a href="https://www.toutiao.com" target="_blank">今日头条</a>
+	    <Container words={words} />
+	</div>,
+	e('c1')
+);
+
+function render(words, id, title) {
+    ReactDOM.render(
+        <Container words={words} title={title} />,
+		e(id)
+	)
+}
+
+let xunzi_words = [
+	'君子知夫不全不粹之不足以为美也，故诵数以贯之，思索以通之，为其人以处之，除其害者以持养之。',
+	'使目非是无欲见也，使口非是无欲言也，使心非是无欲虑也。',
+	'学恶乎始？恶乎终？曰：其数则始乎诵经，终乎读礼；其义则始乎为士，终乎为圣人。',
+	'故不积蹞步，无以致千里；不积小流，无以成江海。骐骥一跃，不能十步；驽马十驾，功在不舍。'
+];
+
+let caigentan_words = [
+	'完得心上之本来，方可言了心；尽得世间之常道，才堪论出世。',
+	'我果为洪炉大冶，何患顽金钝铁之不可陶熔。',
+	'我果为巨海长江，何患横流污渎之不能容纳。',
+	'白日欺人，难逃清夜之鬼报；红颜失志，空贻皓首之悲伤。'
+];
+
+
+
+render(xunzi_words, 'c2');
+
+render(caigentan_words, 'c3', '菜根谭');
+
+
+</script>
+
+<pre>
+	table>(tr>td#c$)*5
+</pre>

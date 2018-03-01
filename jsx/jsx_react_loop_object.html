@@ -1,0 +1,72 @@
+
+<head>
+    <title>Loop对象render React</title>
+    <meta charset="utf-8">
+    <script src="https://cdn.staticfile.org/react/15.5.4/react.js"></script>
+    <script src="https://cdn.staticfile.org/react/15.5.4/react-dom.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/babel-standalone/6.24.0/babel.js"></script>
+</head>
+
+<style type="text/css">
+h3 {
+	color:green;
+}
+
+#place1 {
+	border:dashed pink 1px;
+	text-align: center;
+}
+</style>
+
+<div id="place0"></div>
+<div id="place1"></div>
+
+<script type="text/babel">
+let words_txt = [
+	'吾人适志于花柳烂漫之时，得趣于笙歌腾沸之处，乃是造花之幻境，人心之荡念也。',
+	'须从木落草枯之后，向声希味淡之中，觅得一些消息，才是乾坤的橐龠，人物的根宗。',
+	'静处观人事，',
+	'即伊吕之勋庸、夷齐之节义，',
+	'无非大海浮沤；闲中玩物情，虽木石之偏枯、鹿豕之顽蠢，总是吾性真如。'
+];
+
+let h2=0,h3=10;
+let words_html = words_txt.map(function(word) {
+	// debugger;
+	console.info(word);
+	if(word.endsWith('。')) {
+		return (
+			<h2 key={h2++}>{word}</h2>
+		);
+	} else {
+		return (
+			<h3 key={h3++}>{word}</h3>
+		);
+	}
+});
+
+
+let result = (
+<div>
+	{words_html}
+</div>
+);
+
+console.info('value of words_html');
+
+ReactDOM.render(
+	result,
+	document.getElementById('place0')
+);
+
+let code = <h1>花开花谢春不管，拂意事休对人言；水暖水寒鱼自知，会心处还期独赏。</h1>
+ReactDOM.render(
+	code,
+	document.getElementById('place1')
+);
+
+</script>
+
+<pre>
+	result不是string,也不是html,是JSX创建的UI模板. 
+</pre>

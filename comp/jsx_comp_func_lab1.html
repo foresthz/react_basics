@@ -1,0 +1,72 @@
+
+<head>
+	<title>组件函数JSX</title>
+	<script src="https://cdn.staticfile.org/react/15.5.4/react.js"></script>
+	<script src="https://cdn.staticfile.org/react/15.5.4/react-dom.js"></script>
+	<script type="text/javascript" src="https://cdn.staticfile.org/babel-standalone/6.24.0/babel.js"></script>
+</head>
+
+<style type="text/css">
+#bottom{
+	border:dashed green 1px;
+	text-align: center;
+}
+
+#left {
+	background-color: yellow;
+}
+</style>
+
+<div id="top"></div>
+<div id="content">
+	<div id="left"></div>
+	<div id="middle"></div>
+	<div id="right"></div>
+</div>
+<div id="bottom"></div>
+
+
+
+<script type="text/javascript">
+
+function e(id) {
+	return document.getElementById(id);
+}
+
+</script>
+
+<script type="text/babel">
+
+function HelloWorld(props) {
+	return <h3>Hello {props.name}</h3>
+}
+// JSX组件
+const element_top = <HelloWorld name="ReactName变量" />;
+ReactDOM.render(
+	element_top,
+	e('top')
+);
+
+function Names() {
+	return (
+		<div>
+			<HelloWorld name="闲观扑纸蝇，笑痴人自生障碍" />
+			<HelloWorld name='"鸟惊心"、"花溅泪"，怀此热肝肠，如何领取得冷风月"' /> {Math.random()+2}
+			<HelloWorld name="富贵得一世宠荣，到死时反增了一个恋 字，如负重担" />
+			<HelloWorld name="贫贱得一世清苦，到死时反脱了一个厌字，如释重枷" />
+		</div>
+	)
+}
+
+ReactDOM.render(
+	<Names />,
+	e('bottom')
+)
+
+
+
+</script>
+
+<pre>
+	.top+(.content>(.left+.middle+.right))+.bottom
+</pre>

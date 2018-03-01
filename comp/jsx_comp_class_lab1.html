@@ -1,0 +1,112 @@
+
+
+<head>
+	<title>组件类JSX</title>
+	<script src="https://cdn.staticfile.org/react/15.5.4/react.js"></script>
+	<script src="https://cdn.staticfile.org/react/15.5.4/react-dom.js"></script>
+	<script type="text/javascript" src="https://cdn.staticfile.org/babel-standalone/6.24.0/babel.js"></script>
+</head>
+
+<style type="text/css">
+
+table tr:nth-child(2n) td {
+	background-color: #ffeeff;
+	width: 100%;
+}
+</style>
+
+<table>
+	<tr>
+		<td id="c1"></td>
+	</tr>
+	<tr>
+		<td id="c2"></td>
+	</tr>
+	<tr>
+		<td id="c3"></td>
+	</tr>
+	<tr>
+		<td id="c4"></td>
+	</tr>
+	<tr>
+		<td id="c5"></td>
+	</tr>
+	<tr>
+		<td id="c6"></td>
+	</tr>
+</table>
+
+
+<script type="text/javascript">
+
+let words = [
+	'人诚想念到此，当急回贪恋之首而猛舒愁苦之眉矣。',
+	'鹬蚌相持，兔犬共毙，冷觑来令人猛气全消；',
+	'鸥凫共浴，鹿豕同眠，闲观去使我机心顿息。',
+	'迷则乐境成苦海，如水凝为冰；悟则苦海为乐境，犹冰涣作水。',
+	'可见苦乐无二境，迷悟非两心，只在一转念间耳。',
+	'地宽天高，尚觉鹏程之窄小；云深松老，方知鹤梦之悠闲。',
+	'东海水曾闻无定波，世事何须扼腕？',
+	'北邙山未省留闲地，人生且自舒眉。'
+
+];
+
+function e(id) {
+	return document.getElementById(id);
+}
+
+
+</script>
+
+<script type="text/babel">
+
+class Words extends React.Component {
+	render() {
+		// open('http://baidu.com');
+		return <h3>{this.props.word} <font color="red">字数: {this.props.word.length}</font>
+			 ... 长度大于30: {(this.props.word.length>30).toString()}</h3>;
+	}
+}
+
+ReactDOM.render(
+	<div>
+		<Words word="人之有生也，如太仓之粒米，如灼目之电光，如悬崖之朽木，如逝海之一波。" />
+		<Words word="知此者如何不悲？如何不乐？" />
+		<Words word="如何看他不破而怀贪生之虑？如何看他不重而贻虚生之羞？" />
+	</div>,
+	e('c1')
+);
+
+
+let arr_react_obj = words.map(function(word){
+	if(word.endsWith('？')) {
+		return (<h4 key={Math.random()}>{word}{Math.random()}</h4>)
+	} else if(word.endsWith('。')){
+		return (<h3 key={Math.random()}><font color='blue'>{word}</font></h3>)
+	} else {
+		return (<h2 key={Math.random()}><font color="green">{word}</font></h2>)
+	}
+});
+
+debugger;
+
+ReactDOM.render(
+	///// 数组迭代,外面要再包一层
+	(<div>
+		<span>天地尚无停息，日月且有盈亏，况区区人世能事事园满而时时暇逸乎？</span>
+		<pre>
+			只是向忙里偷闲，遇缺处知足，则操纵在我，作息自如，即造物不得与之论劳逸较亏盈矣！
+				"霜天闻鹤唳，雪夜听鸡鸣"，得乾坤清纯之气。
+						"晴空看鸟飞，活水观鱼戏"，识宇宙活泼之机。
+		</pre>
+		{arr_react_obj}
+	</div>),
+	e('c2')
+);
+
+
+</script>
+
+<pre>
+	table>tr#c$*6
+</pre>
