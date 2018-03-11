@@ -1,0 +1,133 @@
+
+<head>
+	<script src="https://cdn.staticfile.org/react/15.5.4/react.js"></script>
+	<script src="https://cdn.staticfile.org/react/15.5.4/react-dom.js"></script>
+	<script type="text/javascript" src="https://cdn.staticfile.org/babel-standalone/6.24.0/babel.js"></script>
+</head>
+
+div>#c$*4
+<div>
+	<div id="c1"></div>
+	<div id="c2"></div>
+	<div id="c3"></div>
+	<div id="c4"></div>
+</div>
+
+
+<script type="text/javascript">
+
+let data_basic = [
+    ['React'],
+	['Vue','color:red;font-size:40px'],
+	['百度新闻','http://news.baidu.com'],
+	['机器学习','background-color:yellow; font-size:50px']
+]
+let data_all=[
+    ['前端技术'],
+	['百度', 'https://www.baidu.com'],
+	['微博', 'https://weibo.com/', 'color:blue'],
+	['搜狐','http://www.sohu.com','color:red', {title:'搜狐新闻'}],
+	['网易', ['http://www.163.com', 'https://open.163.com'], {title:'网易公开课等', style:'color:red'}]
+];
+
+let search_template = {
+    'zhihu':'https://www.zhihu.com/search?q=mykeyword&type=content'
+}
+
+function e(id){
+	return document.getElementById(id);
+}
+
+function to_obj(str) {
+	let pairs=str.replace(/\s/,'').split(';');
+	let result={};
+	pairs.forEach(function(pair){
+		let item = pair.split(':');
+		result[item[0]]=item[1];
+	});
+	return result;
+
+}
+
+</script>
+
+<script type="text/babel">
+
+class URLItem extends React.Component {
+	constructor(props) {
+	    super();
+	    this.key=1;
+	    this.output = this.processData(props.data);
+	}
+
+	process_Item(item) {
+		// debugger;
+	    if(item.length==1) {
+	        let url = search_template['zhihu'].replace('mykeyword', item[0]);
+			return <a key={this.key++} href={url} target="_blank">{item[0]}</a>
+		} else if(item.length==2){
+			if(item[1].indexOf('http://')==0 || item[1].indexOf('https://')==0) {
+				return <a key={this.key++} href={item[1]} target="_blank">{item[0]}</a>
+			} else {
+				let url = search_template['zhihu'].replace('mykeyword', item[0]);
+				return <a key={this.key++} href={url} style={to_obj(item[1])} target="_blank">{item[0]}</a>
+			}
+		} else{
+	        return <br />
+		}
+	}
+
+	processData(items) {
+		let result = items.map(this.process_Item.bind(this));
+		return result;
+	}
+
+	get_url_from_keyword(my_keyword) {
+		let dict = {
+			'zhihu': 'https://www.zhihu.com/search?q=my_keyword&type=content',
+			'wb': 'http://s.weibo.com/weibo/my_keyword',
+			'bn': 'https://cn.bing.com/search?q=my_keyword',
+			'cnb': 'http://zzk.cnblogs.com/s?t=b&w=my_keyword'
+		};
+		try {
+
+			if (my_keyword.indexOf('://') != -1) {
+				return my_keyword;
+			} else if (my_keyword.startsWith('/')) {
+				return document.location.protocol + '//' + document.location.host + my_keyword;
+			} else {
+				let keys = my_keyword.split('#');
+				my_keyword = keys[0];
+				let type;
+				if (keys.length == 1) {
+					type = 'zhihu';
+				} else {
+					type = keys[1];
+				}
+
+				my_keyword = my_keyword.replace(/\s+/g, '+');
+				return dict[type].replace('my_keyword', my_keyword);
+
+			}
+		} catch (e) {
+			console.info('get_url_from_keyword error');
+		}
+	}
+
+	render(){
+		return (
+			<div>
+				{this.output}
+			</div>
+		)
+
+	}
+
+}
+
+ReactDOM.render(
+	<URLItem data={data_basic} />,
+	e('c1')
+)
+
+</script>

@@ -1,0 +1,38 @@
+<head>
+	<script src="https://cdn.staticfile.org/react/15.5.4/react.js"></script>
+	<script src="https://cdn.staticfile.org/react/15.5.4/react-dom.js"></script>
+	<script type="text/javascript" src="https://cdn.staticfile.org/babel-standalone/6.24.0/babel.js"></script>
+</head>
+
+<title>单个控件加载</title>
+
+<div class="topbar">
+	<button id="btn1">头条(添加事件)</button>
+	<button id="btn2" data-url='http://www.10jqka.com.cn'>同花顺</button>
+	<button id="btn3" data-url='http://www.zreading.cn'>左岸读书</button>
+	<button id="btn4" data-url='https://www.qunar.com/'>去哪儿</button>
+	<button id="btn5" data-url='https://www.hupu.com'>虎扑体育</button>
+</div>
+
+<div id="enhance_toolbox">
+	<div id="pop_div"></div>
+</div>
+
+<div class="statusbar"><span id="status_bar"></span></div>
+
+<script type="text/babel" src="lab2/jsx_pop_lab2_a.jsx"></script>
+
+
+<style type="text/css">
+
+#explain_area {
+	background-color: yellow;
+	display: none;
+	float:left;
+	position: absolute;
+}
+</style>
+<pre>
+	.bar>button#btn$*5
+	必须通过http加载jsx资源文件
+</pre>
